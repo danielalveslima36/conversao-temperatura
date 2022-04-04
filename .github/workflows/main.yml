@@ -21,5 +21,16 @@ jobs:
         with:
           username: ${{secrets.DOCKERHUB_USER}}
           password: ${{secrets.DOCKERHUB_PWD}}
+          
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v2.10.0
+        with:
+          context: ./src
+          file: ./src/Dockerfile
+          push: true
+          tags: |
+            thedainbow/conversao-temperatura:latest
+            thedainbow/conversao-temperatura:${{ github.run_number }}
+  
       
       
